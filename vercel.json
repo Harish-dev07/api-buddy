@@ -4,6 +4,10 @@
     { "src": "dist/**", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "/index.html" }
-  ]
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/old-path", "dest": "/new-path", "status": 301 },
+    { "src": "/(.*)", "headers": { "X-Custom-Header": "my-value" } }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
 }
