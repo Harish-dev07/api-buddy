@@ -3,11 +3,23 @@
   "builds": [
     { "src": "dist/**", "use": "@vercel/static" }
   ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/old-path", "dest": "/new-path", "status": 301 },
-    { "src": "/(.*)", "headers": { "X-Custom-Header": "my-value" } }
-  ],
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" }
+  ],
+
+  "redirects": [
+    { "source": "/old-path", "destination": "/new-path", "permanent": true }
+  ],
+
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Custom-Header", "value": "my-value" }
+      ]
+    }
+  ]
 }
